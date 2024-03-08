@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+<style>
+    *{
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;;
+    }
+
+    #signupcontainer{
+        width: 100%;
+        height:100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #0043BF;
+    }
+
+    #form{
+        width: 25%;
+        height: auto;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    }
+
+    #email{
+        margin-top: 20px;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px;
+        border:none;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
+
+    #password{
+        margin-top: 20px;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px;
+        border:none;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+    }
+
+    #submit{
+        margin-top: 30px;
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-weight: bold;
+        font-size: 15px;
+        background-color: #FFF302;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        cursor: pointer;
+    }
+
+    #submit:hover{
+        background-color: #e7dd1c;
+    }
+
+    #loginpage{
+        margin-top: 20px;
+        font-size: 20px;
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
+        padding-bottom: 20px;
+    }
+
+
+    @media(max-width: 768px){
+      #form{
+        width: 50%;
+      }
+    }
+
+    @media(max-width: 425px){
+      #form{
+        width: 60%;
+      }
+    }
+
+    
+    @media(max-width: 425px){
+      #form{
+        width: 80%;
+      }
+    }
+
+
+
+
+   
+    
+
+</style>
+
+<body>
+
+    <div id="signupcontainer">
+
+    <form action="" id="form">
+         <h1>Sign Up</h1>
+
+        <input type="email" id="email" placeholder="Enter your email address">
+         <input type="password" id="password" placeholder="Create your password">
+        <input type="submit" id="submit">
+
+        <a href="login.html" id="loginpage" target="_blank">Login</a>
+
+    </form>
+
+   </div>
+
+    <div id="cont">
+
+    </div>
+
+</body>
+
+<script>
+   let data =  JSON.parse(localStorage.getItem("userdata"))
+   if(data===null){
+    data=[]
+   }
+
+    document.getElementById("form").addEventListener("submit",function(event){
+        document.getElementById("cont").innerHTML= null
+
+        event.preventDefault()
+
+        
+        let emailval= document.getElementById("email").value
+        let passwordval= document.getElementById("password").value
+
+        let obj={
+            emailval,
+            passwordval
+        }
+
+        let flag= false
+
+        for(let i= 0; i< data.length; i++){
+           
+            if(emailval=== data[i].emailval){
+              flag= true;
+              break
+
+            }
+
+        }
+
+        if(flag){
+            alert("Already registered")
+        }else{
+            data.push(obj)
+            localStorage.setItem("userdata",JSON.stringify(data))
+            alert("You have been created your account, click on login.")
+        }
+
+    })
+</script>
+</html>
