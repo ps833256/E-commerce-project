@@ -63,8 +63,13 @@
     <div id="cont"></div>
   </body>
   <script>
-    let newdata = [];
-    let val = fetch("https://dummyjson.com/products");
+   
+
+let newdata = [];
+    let btndata = [];
+    
+    function fetchdata(){
+      let val = fetch("https://dummyjson.com/products");
     val
       .then(function (res) {
         let data = res.json();
@@ -82,7 +87,10 @@
         console.log(err);
       });
 
-    let btndata = [];
+    }
+
+    fetchdata()
+    
 
     function display(products) {
       document.getElementById("cont").innerHTML = null;
@@ -146,8 +154,11 @@
 
     function filterdata(products) {
       let filter = document.getElementById("filter");
-
+    
       filter.addEventListener("change", function () {
+        if(filter.value===""){
+        display(data.products)
+        }
         let filterdata = products.filter(function (el, index) {
           if (el.category === filter.value) {
             return true;
@@ -168,14 +179,14 @@
         let searchval= document.getElementById("search").value
         let searchData=[]
         let flag= false;
-        for(let i=0; i< newdata.products.length; i++){
+       for(let i=0; i< newdata.products.length; i++){
            if(searchval===newdata.products[i].title || searchval=== newdata.products[i].category || searchval===newdata.products[i].brand){
               flag= true;
               searchData.push(newdata.products[i]);
               
            }
 
-        }
+       }
 
         if(flag){
           display(searchData)
@@ -186,12 +197,7 @@
 
 
 
-    }
-
-    
-
-
-
+   }
 
   
   </script>
